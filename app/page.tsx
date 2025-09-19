@@ -115,6 +115,7 @@ export default function Home() {
           value={searchValue}
           onChange={setSearchValue}
           autoFocus={true}
+          isVisible={isBottomSheetOpen}
         />
         
         {/* Сетка аватаров */}
@@ -149,9 +150,10 @@ export default function Home() {
           onChange={handleSearchChange}
           autoFocus={true}
           variant={isSearchActive ? "default" : "onboarding"}
+          isVisible={isOnboardingOpen}
         />
         
-        <OnboardingText />
+                <OnboardingText isSearchActive={isSearchActive} />
         
         {/* Сетка аватаров */}
         <div className="pt-6 pb-4 px-2">

@@ -9,6 +9,7 @@ interface SearchBarProps {
   className?: string;
   autoFocus?: boolean;
   variant?: 'default' | 'onboarding';
+  isVisible?: boolean;
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({ 
@@ -17,7 +18,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Телефон, имя, карта или платеж",
   className,
   autoFocus = false,
-  variant = 'default'
+  variant = 'default',
+  isVisible = true
 }) => {
   return (
     <div className={cn("w-full h-[72px] px-4 py-2", className)}>
@@ -28,6 +30,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         className="w-full h-[56px]"
         autoFocus={autoFocus}
         variant={variant}
+        isVisible={isVisible}
       />
     </div>
   );

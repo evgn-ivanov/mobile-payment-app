@@ -12,6 +12,7 @@ interface SearchInputProps {
   className?: string;
   autoFocus?: boolean;
   variant?: 'default' | 'onboarding';
+  isVisible?: boolean;
 }
 
 export const SearchInput: React.FC<SearchInputProps> = ({ 
@@ -20,7 +21,8 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   placeholder = "Телефон, имя, карта или платеж",
   className,
   autoFocus = false,
-  variant = 'default'
+  variant = 'default',
+  isVisible = true
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [firstSymbol, setFirstSymbol] = useState<string | null>(null);
@@ -28,7 +30,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
 
   // Автоматический фокус при открытии шторки
   useEffect(() => {
-    if (autoFocus && inputRef.current) {
+    if (autoFocus && isVisible && inputRef.current) {
       // Небольшая задержка для корректной работы анимации
       const timer = setTimeout(() => {
         inputRef.current?.focus();
@@ -36,7 +38,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
       
       return () => clearTimeout(timer);
     }
-  }, [autoFocus]);
+  }, [autoFocus, isVisible]);
 
   const handleFocus = () => {
     setIsFocused(true);
