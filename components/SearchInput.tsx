@@ -143,21 +143,8 @@ export const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   const getInputMode = (): "text" | "numeric" | "tel" | "search" => {
-    // По умолчанию QWERTY клавиатура
-    if (value.length === 0) return "text";
-    
-    // Если вводим цифры - переключаемся на цифровую клавиатуру
-    const inputType = getInputType(value);
-    
-    switch (inputType) {
-      case 'phone':
-        return "tel"; // Телефонная клавиатура с цифрами и +, -, пробелами
-      case 'card':
-      case 'requisites':
-        return "numeric"; // Только цифры
-      default:
-        return "text"; // QWERTY для букв и символов
-    }
+    // Всегда QWERTY клавиатура
+    return "text";
   };
 
   const showClearButton = value.length > 0;
