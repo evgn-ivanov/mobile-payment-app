@@ -142,6 +142,22 @@ export const SearchInput: React.FC<SearchInputProps> = ({
     }
   };
 
+  const getInputMode = (): "text" | "numeric" | "tel" | "search" => {
+    if (value.length === 0) return "text"; // По умолчанию текстовая клавиатура
+    
+    const inputType = getInputType(value);
+    
+    switch (inputType) {
+      case 'phone':
+        return "tel"; // Телефонная клавиатура с цифрами и +, -, пробелами
+      case 'card':
+      case 'requisites':
+        return "numeric"; // Только цифры
+      default:
+        return "text"; // Текстовая клавиатура для букв и символов
+    }
+  };
+
   const showClearButton = value.length > 0;
   const label = getLabel();
 
@@ -188,17 +204,18 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           </div>
         )}
         
-        {/* Input field */}
-        <input
-          ref={inputRef}
-          type="text"
-          value={value}
-          onChange={handleInputChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholder={label ? "" : placeholder}
-          className={cn("w-full bg-transparent text-[17px] text-[#333333] tracking-[-0.41px] leading-[20px] focus:outline-none", placeholderColorClass, caretColorClass)}
-        />
+                {/* Input field */}
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={value}
+                  onChange={handleInputChange}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  placeholder={label ? "" : placeholder}
+                  inputMode={getInputMode()}
+                  className={cn("w-full bg-transparent text-[17px] text-[#333333] tracking-[-0.41px] leading-[20px] focus:outline-none", placeholderColorClass, caretColorClass)}
+                />
       </div>
     </div>
   );
